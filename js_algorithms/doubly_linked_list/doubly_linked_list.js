@@ -108,6 +108,22 @@ class DoublyLinkList {
     this.length--;
     return this.printList();
   }
+  reverse() {
+    if (!this.head.next) {
+      return this.head;
+    }
+    let firstItem = this.head;
+    this.tail = this.head;
+    let secondItem = firstItem.next;
+    while (secondItem) {
+      const temp = secondItem.next;
+      secondItem.next = firstItem;
+      firstItem = secondItem;
+      secondItem = temp;
+    }
+    this.head.next = null;
+    this.head = firstItem;
+  }
 }
 
 const myLinkedList = new DoublyLinkList(10);
@@ -116,10 +132,13 @@ myLinkedList.append(16);
 myLinkedList.prepend(1);
 myLinkedList.insert(2, 99);
 myLinkedList.insert(20, 88);
+
 console.log(myLinkedList.printList());
 
 myLinkedList.remove(2);
 
 console.log('removed index 2:', myLinkedList.printList());
+myLinkedList.reverse();
+console.log('reversed:', myLinkedList.printList());
 
 console.log(myLinkedList);
